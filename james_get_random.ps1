@@ -1,4 +1,4 @@
-Function Jimmy-Get-Random{
+Function James-Get-Random{
 
     param(
         [int]$count
