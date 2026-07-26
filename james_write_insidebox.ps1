@@ -19,7 +19,7 @@ Function James-Write-Insidebox{
 
     if($emptyspace1 -lt 0){
         $textwidth1 = $width1 - ($borderwidth1 * 2)
-        $textarray2 = @(foreach($line in @([string]$textarray1 -split("`r|`n"))  ){
+        $textarray2 = @(foreach($line in @($textarray1)  ){
             if(([string]$line).Length -le ($width1 - ($borderwidth1 * 2))){
                 $line
             }
@@ -39,13 +39,13 @@ Function James-Write-Insidebox{
         $textarray2 = $textarray1
     }
 
-
+    
 
     #text fits on the window
-    #padding
+    #padding 
     #1 close to the text
     #2 middle
-    #3 maxed
+    #3 maxed    
     switch($padding){
         1{
             $halfempty1 = [math]::floor($emptyspace1 /2)
@@ -60,14 +60,14 @@ Function James-Write-Insidebox{
             $verticalempty1 = 1
             $straighthorizontal1 = $halfempty2 * 2 + $textwidth1
             break
-        }
+        }         
         3{
             $halfempty1 = 0
             $halfempty2 = [math]::floor($emptyspace1 /2)
             $verticalempty1 = 2
             $straighthorizontal1 = $halfempty2 * 2 + $textwidth1
             break
-        }
+        }        
 
     }
 
@@ -78,9 +78,9 @@ Function James-Write-Insidebox{
         }
         "right"{
             $halfempty1 =  $width1 - $straighthorizontal1 - 2
-        }
+        }        
     }
-
+    
 
     #lines
     if($lines -eq "single"){
@@ -107,9 +107,9 @@ Function James-Write-Insidebox{
     [string]$output1 = ([string]" " * $halfempty1)
     $output1 += $lefttop
     $output1 += ( [string]$horizontal * ($straighthorizontal1 ) )
-    $output1 += $righttop
+    $output1 += $righttop 
     $output1 += "`r`n"
-
+    
     #top middle
     for($i = 0; $i -lt $verticalempty1; $i++){
         $output1 += ([string]" " * $halfempty1)
@@ -123,12 +123,12 @@ Function James-Write-Insidebox{
     foreach($line in $textarray2){
         $output1 += ([string]" " * $halfempty1)
         $output1 += $vertical
-        $output1 += ( [string]" " * ($halfempty2 ) )
-        $output1 += $line
+        $output1 += ( [string]" " * ($halfempty2 ) ) 
+        $output1 += $line 
         $output1 += ([string]" " * ( $textwidth1 -  $line.length ))
-        $output1 += ( [string]" " * ($halfempty2 ) )
+        $output1 += ( [string]" " * ($halfempty2 ) ) 
         $output1 += $vertical
-        $output1 += "`r`n"
+        $output1 += "`r`n"       
     }
 
 
@@ -139,17 +139,15 @@ Function James-Write-Insidebox{
         $output1 += ( [string]" " * ($straighthorizontal1 ) )
         $output1 += $vertical
         $output1 += "`r`n"
-    }
+    } 
 
     #bottom
     [string]$output1 += ([string]" " * $halfempty1)
     $output1 += $leftbottom
     $output1 += ( [string]$horizontal * ($straighthorizontal1 ) )
-    $output1 += $rightbottom
-    $output1 += "`r`n"
-
+    $output1 += $rightbottom 
+    $output1 += "`r`n"    
+        
     return $output1
-
-
-
+ 
 }
