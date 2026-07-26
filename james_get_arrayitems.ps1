@@ -19,7 +19,7 @@ Function James-Get-ArrayItems{
 	}
 	
 	#write function
-	Function Jimmy-Write-ArrayItems{
+	Function James-Write-ArrayItems{
 	
 		param(
 		[Parameter(Mandatory = $true, Position=0)][array]$array,
@@ -30,7 +30,7 @@ Function James-Get-ArrayItems{
 		[bool][Parameter(Mandatory = $false, Position=5)]$index
 		)
 	
-		Function Jimmy-Write-boxMode{
+		Function James-Write-boxMode{
 		
 			param(
 				[Parameter(Mandatory = $true, Position=0)][array]$array,
@@ -343,7 +343,7 @@ Function James-Get-ArrayItems{
 		}
 		$headers1 = @(for($i = 1; $i -le $columns; $i++){ "[string]$" + "c_$($i)"}) -join(";")
 		$expression1 = @"
-			class jimmysclass {
+			class Jamessclass {
 				$( $headers1 )
 			}
 "@
@@ -355,7 +355,7 @@ Function James-Get-ArrayItems{
 	
 			$resulttable = @()  
 			for($i = 0; $i -lt $display_array1.count; $i += $columns){
-			$ourobject = New-Object -TypeName jimmysclass
+			$ourobject = New-Object -TypeName Jamessclass
 			for($j = 0; $j -lt $columns; $j++){
 				$property2 = "c_$($j + 1)"
 				$ourobject.$property2 = $display_array1[$i + $j].name 
@@ -370,7 +370,7 @@ Function James-Get-ArrayItems{
 			#build the empty table
 			$resulttable = @()  
 			for($i = 0; $i -lt $display_array1.count; $i += $columns){
-			$ourobject = New-Object -TypeName jimmysclass
+			$ourobject = New-Object -TypeName Jamessclass
 			$resulttable += $ourobject
 			}
 	
@@ -385,7 +385,7 @@ Function James-Get-ArrayItems{
 	
 		
 		if($boxmode){
-			Jimmy-Write-boxMode -array $resulttable -displaymode $displaymode  | Out-Host
+			James-Write-boxMode -array $resulttable -displaymode $displaymode  | Out-Host
 		}
 		else{
 			$resulttable | format-table * -Wrap -HideTableHeaders | Out-Host
@@ -434,7 +434,7 @@ Function James-Get-ArrayItems{
 	
 		#write output
 		if($boxmode){
-			Jimmy-Write-boxMode -array $resulttable -displaymode $displaymode | Out-Host
+			James-Write-boxMode -array $resulttable -displaymode $displaymode | Out-Host
 		}
 		else{
 			$resulttable | format-table * -Wrap  | Out-Host
@@ -455,10 +455,10 @@ Function James-Get-ArrayItems{
 	#display
 	write-host ("-" * $windowwidth1 + "`r") -ForegroundColor Blue
 	if($columns){
-		Jimmy-Write-ArrayItems -array $array -property $property  -displaymode $displaymode -boxmode $boxmode -index $index -columns $columns
+		James-Write-ArrayItems -array $array -property $property  -displaymode $displaymode -boxmode $boxmode -index $index -columns $columns
 	}
 	else{        
-		Jimmy-Write-ArrayItems -array $array -property $property  -displaymode $displaymode -boxmode $boxmode -index $index
+		James-Write-ArrayItems -array $array -property $property  -displaymode $displaymode -boxmode $boxmode -index $index
 	}
 	
 	$iteration1 = 0
@@ -678,7 +678,7 @@ Function James-Get-ArrayItems{
 	By default all display modes try to use as much of the screen as possible
 	
 	.EXAMPLE
-	$array = get-process | select-object -first 11; Jimmy-Get-ArrayItems -array $array
+	$array = get-process | select-object -first 11; James-Get-ArrayItems -array $array
 	
 ┌──────────────┬─────────────────────┬────────────────────────┬──────────┐
 │[ 0] abyssws  │[ 3] AdminService    │[ 6] Bridge_Service     │[ 9] Code │
@@ -704,7 +704,7 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
     Uses default display mode 2 (column-major) displays only the 'name' or each item of the array, shows the data encapsulated in a boxed grid, and includes the item indices.
     
     .EXAMPLE
-    $array = "no","yes","maybe" ; Jimmy-Get-ArrayItems -array $array  -displaymode 1 -single $true -boxmode $true
+    $array = "no","yes","maybe" ; James-Get-ArrayItems -array $array  -displaymode 1 -single $true -boxmode $true
 
 ┌────────┬─────────┬──────────┐
 │[0] no  │[1] yes  │[2] maybe │
@@ -718,18 +718,18 @@ yes
 	This example shows how the function could be incorporated into a console text user interface TUI.
 	
 	.EXAMPLE
-	$array = import-csv "myfile.csv"; Jimmy-Get-ArrayItems -array $array  -displaymode 3 -single $true -boxmode $false
+	$array = import-csv "myfile.csv"; James-Get-ArrayItems -array $array  -displaymode 3 -single $true -boxmode $false
 	
 	Uses default display mode 3 (format-table) displays all properties which fit on the screen, and includes the item indices.
 	This command doesn't use boxmode so the table is shown in normal PowerShell format-table mode which is more compact that my boxmode.
 	
 	.EXAMPLE
-	$array = @(get-aduser -filter *); Jimmy-Get-ArrayItems -array $array  -displaymode 1 -property "userprincipalname" -single $false -boxmode $true
+	$array = @(get-aduser -filter *); James-Get-ArrayItems -array $array  -displaymode 1 -property "userprincipalname" -single $false -boxmode $true
 	
 	This example shows an array of users in row-major mode, and onlny shows the userprincipal name of each item. By default it would have shown the name of each item.
 	
 	.EXAMPLE
-	$array = 0..99; Jimmy-Get-ArrayItems -array $array  -displaymode 2 -single $true -boxmode $true -columns 5
+	$array = 0..99; James-Get-ArrayItems -array $array  -displaymode 2 -single $true -boxmode $true -columns 5
 	
 	This example lets the user select a number between 0 and 99. The command features the columns parameter with a sensibly low number.
 	I have found display mode 2 (column-major, instead of mode 1 row major) to be more legible when there are lots of items on display.
