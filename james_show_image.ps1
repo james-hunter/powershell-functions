@@ -54,7 +54,8 @@ Function James-Show-Image{
 	
 	}
 	if(test-path $imagepath){
-		$Picturebox1.Image = [System.Drawing.Image]::Fromfile($imagepath ) 
+		$imagefullpath = get-item $imagepath
+		$Picturebox1.Image = [System.Drawing.Image]::Fromfile($imagefullpath.fullname )
 		#Show the Form
 		$Form1.ShowDialog()| Out-Null
 	}
