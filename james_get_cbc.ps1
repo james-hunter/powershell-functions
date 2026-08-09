@@ -3,25 +3,11 @@
 Function James-Get-CBC{
 
     #import
-    if(test-path "james_get_arrayitem.ps1"){
-        . "./james_get_arrayitem.ps1"
-    }
-    if(test-path "james_write_arrayitem.ps1"){
-        . "./james_write_arrayitem.ps1"
-    }    
     if(test-path "james_write_insidebox.ps1"){
         . "./james_write_insidebox.ps1"
     }    
     if(test-path "james_format_centre.ps1"){
         . "./james_format_centre.ps1"
-    }    
-    if(!(Get-Command James-Get-ArrayItem)){
-        Write-Host "Command not available: James-Get-ArrayItem"
-        break
-    }    
-    if(!(Get-Command James-Write-ArrayItem)){
-        Write-Host "Command not available: James-Write-ArrayItem"
-        break
     }    
     if(!(Get-Command James-Write-InsideBox)){
         Write-Host "Command not available: James-Write-InsideBox"
